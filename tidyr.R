@@ -37,4 +37,66 @@ table3 %>%
 table5 %>%
     unite(new, century, year, sep = "")
 
+# misssing values
 
+# explicit: flagged with NA
+# implicit: simply not present in data
+
+stocks  <- tibble(
+    year = c(2015, 2014),
+    qtr = c(1, 2, 3),
+    return = c(1.88, 0.49, NA)
+)
+
+# first year value missing (implicit)
+# return has NA value (explicit)
+
+
+# fixing explicit missing values
+stocks %>%
+    spread(year, return) %>%
+    gather(year, return, `2015`:`2016`, na.rm = TRUE)
+
+# fill - will fill in missing values with last non-missing value
+treatment %>%
+    fill(person)
+
+
+############# TIDYR CASE STUDY ##################
+
+
+who # internal tidyr datatset
+
+# gather together columns that are not variables
+who1  <- who %>%
+    gather(new_sp_m014:newrel_f65, key = "key", value = "cases", na.rm = TRUE)
+
+# counting instances of new column
+who1 %>%
+    count(key)
+
+# fix newrel -> new_rel to match rest of strings within column
+who2  <- who1 %>%
+    mutate(key = string::str_replace(key, "newrel", "new_rel"))
+
+# split column into three unique columns
+who3  <- who2 %>%
+    separate(key, c("new", "type", "sexage"), sep = "_")
+
+# drop new column since all data points are new
+# also drop iso2 and iso3
+who4  <- who3 %>%
+    select(-new, -iso2, -iso3)
+
+# separate sexage -> sex and age column
+who5  <- who4 %>%
+    separate(sexage, c("sex", "age"), sep = 1)
+
+
+# complex pipe
+who %>%
+    gather(code, value, new_sp_m014:newrel_f65, na.rm = TRUE) %>%
+    mutate(code = stringr::str_replace(code, "newrel", "new_rel")) %>%
+    separate(code, c("new", "var", "seaxage")) %>%
+    select(-new, -iso2, -iso3) %>%
+    separate(sexage, c("sex", "age"), sep = 1)
