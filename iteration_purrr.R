@@ -80,3 +80,89 @@ while (nheads < 3) {
   }
   flips  <- flips + 1
 }
+
+
+# functional programming - purr
+
+# map funcitons
+map() # makes a list
+map_lgl() # makes a logical vector
+map_int() # makes an integer vector
+map_dbl() # double vector
+map_chr() # character vector
+
+# using map functions - taking function applying to vector
+map(df, mean)
+map_dbl(df, median)
+map_dbl(df, sd)
+
+# map functions using the pipe
+df %>% map_dbl(mean)
+df %>% map_dbl(median)
+df %>% map_dbl(sd)
+
+# second argument of map can be:
+    # formula
+    # character vector
+    # integer vector
+
+# shortcuts
+models  <- mtcars %>%
+    split(.$cyl) %>%
+    map(function(df) lm(mpg ~ wt, data = df))
+
+# anonymous function - purr shortcut
+models  <- mtcars %>%
+    splti(.$cyl) %>%
+    map(~lm(mpg ~ wt, data = .))
+
+models %>%
+    map(summary) %>%
+    map_dbl(~.$r.squared)
+
+# even shorter shortcut - using string
+models %>%
+    map(summary) %>%
+    map_dbl("r.squared")
+
+# using integer to select
+x  <- list(list(1, 2, 3), list(4, 5, 6), list(7, 8, 9))
+x %>% map_dbl(2) # 2 5 8
+
+# safely() - dealing with failures
+x  <- list(1, 10, "a")
+y  <- x %>% map(safely(log))
+str(y)
+
+# possibly() - specify value to return if failure
+x  <- list(1, 10, "a")
+x %>% map_dbl(possibly(log, NA_real_))
+
+# quietly() - captures errors, printed output + warnings
+x  <- list(1, -1)
+x %>% map(quietly(log)) %>% str()
+
+# mapping over multiple arguments
+
+# random normals with different means
+mu  <- list(5, 10, -3)
+mu %>%
+    map(rnorm, n = 5) %>%
+    str()
+
+# changing sd() as well
+sigma  <- list(1, 5, 10)
+seq_along(mu) %>%
+    map(~rnorm(5, mu[[.]], sigma[[.]])) %>%
+    str()
+
+# using map2() to iterate over multiple inputs
+# iterate over two vectors in parallel
+map2(mu, sigma, rnorm = 5) %>% str()
+
+# using pmap() for extended arguments
+n  <- list(1, 3, 5)
+args1  <- list(n, mu, sigma)
+args1 %>%
+    pmap(rnorm) %>%
+    str()
