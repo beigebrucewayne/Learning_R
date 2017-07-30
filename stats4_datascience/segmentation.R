@@ -36,3 +36,24 @@
 
 	# Provides output that scores every obs with prob of belonging to each segment
 
+  # sample needed
+    # over sampling - forcing a metric to be over represented in sample
+    # stratifying - sampling technique choosing obs based on distributions of another metric
+
+  # test for non-normality
+    # z-score for each variable, then delete obs with score +/- 3.0 std dev
+
+  # run k-means with a LOT of clusters (i.e 100)
+    # remove clusters with super low size - multivariate definition are unusual
+
+  # BIC - smallest error = better
+    # calculates area of error (negative probability)
+
+  # Runs model again w/o insignifcant variables
+
+  # correct for white noise, using bi-variate residuals
+
+
+# Why RFM is non-optimal (recency, frequency, and monetary)
+  # about financial return on database, not abotu understanding consumer
+  # cannot learn why customer changed tier
