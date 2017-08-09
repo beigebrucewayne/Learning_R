@@ -30,3 +30,27 @@ table(mtcars$carb) / length(mtcars$carb)
 temp.density  <- density(airquality$Temp)
 pdf  <- approxfun(temp.density$x, temp.density$y, rule=2)
 integrate(pdf, 80, 90)
+
+# plotting bar
+library(ggplot2)
+qplot(factor(carb), data=mtcars, geom="bar")
+
+# colorized version
+qplot(factor(carb),
+      data=mtcars,
+      geom="bar",
+      fill=factor(carb),
+      xlab="number of carburetors")
+
+# histogram
+qplot(Temp, data=airquality, geom="histogram")
+
+# pdf graph
+qplot(Temp, data=airquality, geom="density")
+
+# better pdf graph with color
+qplot(Temp, data=airquality, geom="density",
+      adjust = .5,  # changes bandwidth
+      fill=I("pink"),
+      alpha = I(.5),  # changes transparency
+      main = "density plot of temperature data")

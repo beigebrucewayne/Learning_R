@@ -14,4 +14,6 @@ dim(head(diamonds, n=4)) # dim = dimensions
 # using the pipe
 diamonds %>% head(4) %>% dim
 
-
+# selecting columns
+select(diamonds, carat, price)
+carat_price  <- select(diamonds, carat, price)
