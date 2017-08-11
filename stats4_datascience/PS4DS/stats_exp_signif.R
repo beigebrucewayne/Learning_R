@@ -159,3 +159,51 @@ degrees_of_freedom  <- (r - 1) * ( c - 1 )
 ##### FISHER'S EXACT TEST
 
 fisher.test(clicks)
+
+
+##### MULTI ARM BAND ALGORITHM
+
+# multi-arm bandit - multitreatment experiment - imaginary slot machine with multiple arms for customer to choose from, each with different payoffs
+# arm - treatment in an experiment (e.g. "headline A in a  web test")
+# win - experimental analog of a win at slot machine (e.g. "customer clicks on the link")
+
+
+# epsilon-greedy algorithm for A/B test
+
+# generate random number between 0 and 1
+# if number between 0 and epsilon (num between 0 and 1, typically fairly small) -> flip a fair coin(50/50 prob) and...
+      # if coin is heads -> show offer A
+      # if coin is tails -> show offer B
+# if num >= epsilon, show offer has had the highest response rate to date
+
+# if epsilon = 1, standard A/B test
+# if epsilon = 0, purely greedy algo - simply assigns subjects to best-performing treatment
+
+
+# thompson's sampling
+
+  # samples @ each stage to maximize prob of choosing best arm
+  # uses beta distribution for sampling
+  # info updated after each draw
+
+
+##### POWER AND SAMPLE SIZE
+
+# effect size - minimum size of effect you hope to be able to detect in statistical test, such as "a 20% improvement in click rates"
+# power - probability of detecting a given effect size with given sample size
+# significance level - stat signif level at which the test will be conducted
+
+# four parts of calculating power or required sample size
+
+# 1. sample size
+# 2. effect size you want to detect
+# 3. signif level (alpha) at which the test will be conducted
+# 4. power
+
+library(pwr)
+pwr.2p.test(h= ..., n= ..., sig.level= ..., power= ...)
+
+# h = effect size (as proportion)
+# n = sample size
+# sig.level = the signif level (alpha) @ which to test
+# power = power (prob of detecting the effect size)
