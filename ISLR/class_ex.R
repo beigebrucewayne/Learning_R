@@ -85,4 +85,51 @@ lda.class[1:20]
 # 4 inputs
     # 1. Matrix containing predictors associated with training data
     # 2. Matrix containing predictors associated with data for which we wish to make predictions
-    # 3.q
+    # 3. Vector containing class labels for training obs
+    # 4. Value for K, # of nearest neighbors to be used by classifier
+
+library(class)
+library(ISLR)
+attach(Smarket)
+train.X  <- cbind(Lag1, Lag2)[train,]
+test.X  <- cbind(Lag2, Lag2)[!train,]
+train.Direction  <- Direction[train]
+head(train.Direction)
+set.seed(1)
+knn.pred  <- knn(train.X, test.X, train.Direction, k=1)
+table(knn.pred, Direction.2005)
+mean(knn.pred==Direction.2005)
+
+# Caravan data - response: whether they purchase insurance or not
+library(ISLR)
+dim(Caravan)
+head(Caravan)
+names(Caravan)
+attach(Caravan)
+summary(Caravan$Purchase)
+out  <- 348/5822
+
+# standardize variables to a mean of zero, std dev = 1
+# scale() - mean = zero, std dev = 1
+# column 86 = qualitative column "Purchase"
+standardized.X  <- scale(Caravan[,-86])
+var(Caravan[,1])
+var(Caravan[,2])
+var(standardized.X[,1])
+var(standardized.X[,2])
+# test set -> first 1000 obs
+# training set -> remaining obs
+# fit K=1, then evaluate performance
+test  <- 1:1000
+train.X  <- standardized.X[-test,]
+test.X  <- standardized.X[test,]
+train.Y  <- Caravan$Purchase[-test]
+test.Y  <- Caravan$Purchase[test]
+set.seed(1)
+knn.pred  <- knn(train.X, test.X, train.Y, k=1)
+mean(test.Y!=knn.pred)
+mean(test.Y!="No")
+table(knn.pred, test.Y)
+# KNN, with K=3
+knn.pred  <- knn(train.X, test.X, train.Y, k=3)
+table(knn.pred, test.Y)
