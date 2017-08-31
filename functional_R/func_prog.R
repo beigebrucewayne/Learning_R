@@ -97,4 +97,70 @@ sqrt_newton_vec(numbers, 1)
 
 ### REDUCE()
 
+Reduce(`+`, numbers, init=0)
 
+# basic min function
+my_min  <- function(a, b) {
+  if(a < b) {
+    return(a) 
+  } else {
+    return(b)  
+  }
+}
+
+# minimum of a list of numbers
+Reduce(my_min, numbers)
+Reduce(min, numbers)
+
+
+### Mapping and Reducing: the purrr way
+
+
+library("purrr")
+a  <- seq(1,10)
+is_multiple_of_two  <- function(x) {
+  ifelse(x %% 2 == 0, TRUE, FALSE)
+}
+map_if(a, is_multiple_of_two, sqrt)
+
+# reducing wiht purrr
+
+a  <- seq(1,10)
+reduce(a, `-`)
+reduce_right(a, `-`)
+accumulate(a, `-`)
+accumulate_right(a, `-`)
+
+# useful funcitons from purrr
+
+a  <- list("a", 4, 5)
+sqrt(a) # error
+safe_sqrt  <- safely(sqrt)
+map(a, safe_sqrt)
+
+possibly() # specify return value in case of an error
+possible_sqrt  <- possibly(sqrt, otherwise = NA_real_)
+map(a, possible_sqrt)
+sqrt(as.numeric(a))
+
+transpose() # lists:
+safe_sqrt  <- safely(sqrt, otherwise = NA_real_)
+map(a, safe_sqrt)
+transpose(map(a, safe_sqrt))
+
+
+### anonymous functions
+
+data(mtcars)
+head(mtcars)
+library(purrr)
+mtcars2000  <- mtcars
+mtcars2001  <- mtcars
+mtcars2001$cyl  <- mtcars2001$cyl+3
+datasets  <- list("mtcars2000" = mtcars2000, "mtcars2001" = mtcars2001)
+map(datasets, hist, cyl) # error 'x' must be numeric
+map(datasets, (function(x) hist(x$cyl)))
+map2(
+     .x = datasets, .y=names(datasets),
+     (function(.x, .y) hist(.x$cyl, main=paste("Histogram of cyl in", .y)))
+)
