@@ -1,7 +1,7 @@
 # square root of a number - newton's algo
-sqrt_newton  <- function(a, init, eps = 0.01) {
+sqrt_newton  <- function(a, init, eps = 0.01) { 
   while(abs(init**2 - a) > eps) {
-    init  <- 1/2*(init + a/init)
+    init  <- (1 / 2) * (init + a / init)
   }
   return(init)
 }
@@ -14,7 +14,7 @@ sqrt_newton_recur  <- function(a, init, eps=0.01) {
   if(abs(init**2 - a) < eps) {
     result  <- init  
   } else {
-    init  <- 1/2*(init + a/init)
+    init  <- 1 / 2 * (init + a / init)
     result  <- sqrt_newton_recur(a, init, eps)
   }
   return(result)
@@ -52,10 +52,10 @@ sqrt_newton_count  <- function(a, init, count_iter=0, eps=0.01) {
 }
 
 
-### MAPPING + REDUCING => BASE R
+# MAPPING + REDUCING => BASE R
 
 numbers  <- c(16, 25, 36, 49, 64, 81)
-sqrt_newton(numbers, init=rep(1,6), eps=rep(0.001, 6))
+sqrt_newton(numbers, init = rep(1, 6), eps = rep(0.001, 6))
 
 # using map to solve problem
 Map(sqrt_newton, numbers, init=1)
@@ -72,7 +72,7 @@ sqrt_newton_vec(numbers, 1)
 
 ### BASE R - Higher Order Functions
 
-Map()
+Map(
 apply()
 lapply()
 mapply()
