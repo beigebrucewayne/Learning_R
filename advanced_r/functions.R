@@ -211,3 +211,11 @@ f(ls())
 x  <- NULL
 if (!is.null(x) && x > 0){
 }
+
+`&&`  <- function(x, y) {
+  if (!x) return(FALSE)
+  if (!y) return(FALSE)
+  TRUE
+}
+a  <- NULL
+!is.null(a) && a > 0

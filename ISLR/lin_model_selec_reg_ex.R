@@ -92,5 +92,10 @@ for(i in 1:19) {
 
 
 ####################
-# Ridge Regression
+# Ridge Regression & Lasso
 ####################
+
+library(glmnet)
+# model.matrix...turns cat vars -> numeric vars
+x  <- model.matrix(Salary ~ ., hitters[, -1])
+y  <- hitters$Salary
