@@ -16,7 +16,13 @@ shinyUI(pageWithSidebar(
     h4('H4 text')
   ),
   mainPanel(
-    h3('Main Panel text'),
+    h3('Illustrating outputs'),
+    h4('You entered'),
+    verbatimTextOutput('oid1'),
+    h4('You entered'),
+    verbatimTextOutput('oid2'),
+    h4('You entered'),
+    verbatimTextOutput('odate'),
     code('some code'),
     p('some ordinary text')
   )
