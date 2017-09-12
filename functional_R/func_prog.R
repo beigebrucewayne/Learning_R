@@ -20,7 +20,7 @@ sqrt_newton_recur  <- function(a, init, eps=0.01) {
   return(result)
 }
 
-sqrt_newton_recur(16,2)
+sqrt_newton_recur(16, 2)
 
 
 ### properties of functions
