@@ -1,6 +1,6 @@
 library(shiny)
 library(ggplot2)
-library(magrittr)
+library(dplyr)
 
 bcl  <- read.csv('bcl-data.csv', stringsAsFactors = FALSE)
 
@@ -18,11 +18,12 @@ ui  <- fluidPage(
       ),
       mainPanel(
         plotOutput('coolplot'),
-        br(),
-        br(),
-        tableOutput('results'))
+        br(), br(),
+        tableOutput('results')
+        )
     )
 )
+
 
 server  <- function(input, output) {
   output$coolplot  <- renderPlot({
