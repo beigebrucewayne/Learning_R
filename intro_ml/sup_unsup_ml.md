@@ -35,3 +35,5 @@ test$output  <- predict(model2, new.data)
 
 sqrt(sum(test$mpg - test$output)^2/nrow(test))
 ```
+
+#### Classification
