@@ -2,10 +2,10 @@
 
 ## DNN Settings
 
-- Small number of neurons :: high error, pred factors too complex
-- Large number of neurons :: overfit training data and not generalize
-- # of neurons in each hidden layer :: between size of input and output layer, potentially mean
-- # of neurons in each hidden layer :: not twice size of input neurons
+* Small number of neurons :: high error, pred factors too complex
+* Large number of neurons :: overfit training data and not generalize  
+* # of neurons in each hidden layer :: between size of input and output layer, potentially mean  
+* # of neurons in each hidden layer :: not twice size of input neurons  
 
 ## z-score norm
 
@@ -36,6 +36,6 @@ tensorflow | variety of dnn | c++ / python / google
 
 ## Turn Cat Vars -> Numeric
 
-College$Private :: "Yes", "No", "Yes"
-Private :: as.numeric(College$Private) - 1
-Private :: 1, 0, 1
+College$Private :: "Yes", "No", "Yes"  
+Private :: as.numeric(College$Private) - 1  
+Private :: 1, 0, 1  
