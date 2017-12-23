@@ -4,8 +4,8 @@
 
 * Small number of neurons :: high error, pred factors too complex
 * Large number of neurons :: overfit training data and not generalize  
-* # of neurons in each hidden layer :: between size of input and output layer, potentially mean  
-* # of neurons in each hidden layer :: not twice size of input neurons  
+* Number of neurons in each hidden layer :: between size of input and output layer, potentially mean  
+* Number of neurons in each hidden layer :: not twice size of input neurons  
 
 ## z-score norm
 
