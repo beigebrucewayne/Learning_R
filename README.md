@@ -23,3 +23,28 @@ system2()
 ```r
 browseURL("mysite.com")
 ```
+
+### Fake OOP
+```r
+book = list(
+    title <- NULL,
+    year <- NULL,
+    price <- NULL,
+
+    init = function(lst, t, y, p) {
+        lst$title <- t
+        lst$year <- y
+        lst$price <- p
+        return(lst)
+    },
+
+    display = function(lst) {
+        cat("Title :", lst$title, "\n")
+    },
+
+    setPrice = function(lst, p) {
+        lst$price <- p
+        return(lst)
+    }
+)
+```
