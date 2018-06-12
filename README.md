@@ -1,12 +1,15 @@
 # explorations in the R language
 
-#### Looping + Dataframe Creation
-```r
-for (i in 1:10000) {
-	mylist[[i]] <- someHugeSimulation
-}
+#### Train / test split
 
-result <- do.call("rbind", mylist)
+```r
+split_data <- function(data, p = 0.7, s = 23) {
+    set.seed(s)
+    index <- sample(1:dim(data))[1]
+    train <- data[index[1:floor(dim(data)[1] * p)], ]
+    test <- data[index[((ceiling(dim(data)[1] * p)) + 1):dim(data)[1]], ]
+    return(list(train = train, test = test))
+}
 ```
 
 #### Remove anything other than English / space
@@ -18,12 +21,6 @@ removeNumPunct <- function(x) gsub("[^[:alpha:][:space:]]*", "", x)
 ```r
 system2()
 ```
-
-#### Calling Browser
-```r
-browseURL("mysite.com")
-```
-
 ### Fake OOP
 ```r
 book = list(
