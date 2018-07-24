@@ -10,6 +10,11 @@ split_data <- function(data, p = 0.7, s = 23) {
     test <- data[index[((ceiling(dim(data)[1] * p)) + 1):dim(data)[1]], ]
     return(list(train = train, test = test))
 }
+
+# example usage
+all <- split_data(data, p = 0.7)
+train <- all$train
+test <- all$test
 ```
 
 #### Remove anything other than English / space
